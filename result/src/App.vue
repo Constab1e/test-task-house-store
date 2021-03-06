@@ -9,6 +9,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  background: #eee;
+  background: rgb(99, 197, 243);
+  height: 100%;
+  background-image: url(assets/1.jpg);
+  background-size: cover;
+  background-attachment: fixed;
 }
 </style>

@@ -24,7 +24,7 @@ export default {
 /* fix image height */
 .card-img-top {
   width: 100%;
-  height: 20vw;
+  height: 15vw;
   object-fit: cover;
 }
 </style>

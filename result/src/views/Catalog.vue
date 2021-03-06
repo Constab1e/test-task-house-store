@@ -1,13 +1,20 @@
 <template>
   <div class="container-fluid">
-    <nav class="navbar navbar-light bg-light" style="background: #eee">
-      <router-link to="/" class="navbar-brand">Home</router-link>
+    <nav class="navbar navbar-light bg-transparent">
+      <div class="container-fluid">
+        <router-link to="/" class="navbar-brand">Home</router-link>
+      </div>
     </nav>
-    <div class="row row-cols-3 row-cols-lg-3 g-3">
+    <transition-group
+      appear
+      name="itemlist"
+      tag="div"
+      class="row row-cols-6 row-cols-lg-6 g-3 justify-content-center"
+    >
       <div v-for="item in items" :key="item.id">
         <SingleItem :item="item" />
       </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -24,4 +31,17 @@ export default {
 </script>
 
 <style>
+.itemlist-enter-from {
+  opacity: 0;
+  transform: scale(0.6);
+  transform: translateX(-100px);
+}
+.itemlist-enter-to {
+  opacity: 1;
+  transform: scale(1);
+  transform: translateX(0);
+}
+.itemlist-enter-active {
+  transition: all 0.3s ease;
+}
 </style>
