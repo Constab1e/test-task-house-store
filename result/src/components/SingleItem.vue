@@ -5,7 +5,12 @@
       <h4 class="card-title">{{ item.title }}</h4>
       <p class="card-text">Price: {{ item.price }}$</p>
     </div>
-    <button class="btn btn-primary">Buy</button>
+    <router-link
+      class="btn btn-primary"
+      :to="{ name: 'OrderConfirmation', params: { id: item.id } }"
+    >
+      Buy
+    </router-link>
   </div>
 </template>
 
@@ -13,9 +18,7 @@
 export default {
   props: ["item"],
   methods: {
-    showImg(item) {
-      return item.img;
-    },
+    handleSubmit() {},
   },
 };
 </script>

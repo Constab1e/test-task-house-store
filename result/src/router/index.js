@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Catalog from '../views/Catalog'
 import Home from '../views/Home'
-
+import OrderConfirmation from '../views/OrderConfirmation'
 const routes = [
   {
     path: '/',
@@ -13,6 +13,13 @@ const routes = [
     path: '/catalog',
     name: 'Catalog',
     component: Catalog
+  },
+  {
+    path: '/order/:id',
+    name: 'OrderConfirmation',
+    component: OrderConfirmation,
+    props: true
+
   }
 
 ]
