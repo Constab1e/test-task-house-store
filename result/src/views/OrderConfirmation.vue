@@ -41,6 +41,7 @@
           <div class="row">
             <div class="col">
               <input
+                v-model="name"
                 placeholder="Enter your name"
                 type="text"
                 class="form-control"
@@ -48,12 +49,17 @@
             </div>
             <div class="col">
               <input
+                v-model="phone"
                 placeholder="Enter your phone number"
                 type="text"
                 class="form-control"
               />
             </div>
-            <div class="col"><button class="btn btn-primary">BUY</button></div>
+            <div class="col">
+              <button class="btn btn-primary" :disabled="buttonEnabled">
+                BUY
+              </button>
+            </div>
           </div>
         </div>
       </form>
@@ -76,11 +82,20 @@ export default {
       discount: false,
       discountedTotal: 0,
       promocode: 1010,
+      buttonEnabled: false,
     };
   },
   methods: {
     back() {
       this.$router.go(-1);
+    },
+    // checks if the fields are filled up
+    checkButton() {
+      if (this.name !== "" && this.phone !== "") {
+        this.buttonEnabled = false;
+      } else {
+        this.buttonEnabled = true;
+      }
     },
   },
   computed: {
@@ -91,6 +106,7 @@ export default {
   mounted() {
     this.item = this.$store.getters.getItem(this.getId);
     this.price = this.item.price;
+    this.checkButton();
   },
   updated() {
     // logic for price
@@ -102,6 +118,7 @@ export default {
     } else {
       this.discount = false;
     }
+    this.checkButton();
   },
 };
 </script>
