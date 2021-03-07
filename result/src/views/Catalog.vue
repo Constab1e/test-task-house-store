@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <nav class="navbar navbar-light bg-transparent">
       <div class="container-fluid">
         <router-link to="/" class="navbar-brand">Home</router-link>
@@ -9,7 +9,7 @@
       appear
       name="itemlist"
       tag="div"
-      class="row row-cols-6 row-cols-lg-6 g-3 justify-content-center"
+      class="row row-cols-md-2 row-cols-lg-4 g-3"
     >
       <div v-for="item in items" :key="item.id">
         <SingleItem :item="item" />

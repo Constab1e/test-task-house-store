@@ -14,5 +14,6 @@ body {
   background-image: url(assets/1.jpg);
   background-size: cover;
   background-attachment: fixed;
+  overflow-x: hidden;
 }
 </style>

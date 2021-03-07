@@ -8,6 +8,7 @@ export default createStore({
       { id: 3, title: "House 3", price: 600, img: 'https://i.pinimg.com/originals/de/99/a4/de99a4cf0664b2bd813aa5d34c0492b9.png' },
       { id: 4, title: "House 4", price: 1000, img: 'https://ownwoodenhouse.com/img/news/2016020401.jpg?ver=153844246214?w=850' },
       { id: 5, title: "House 5", price: 800, img: 'https://images.adsttc.com/media/images/5e68/48ed/b357/658e/fb00/0441/newsletter/AM1506.jpg?1583892706' },
+
     ]
   },
   mutations: {
