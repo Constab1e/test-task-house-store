@@ -1,10 +1,6 @@
 <template>
   <div class="container">
-    <nav class="navbar navbar-light bg-transparent">
-      <div class="container-fluid">
-        <router-link to="/" class="navbar-brand">Home</router-link>
-      </div>
-    </nav>
+    <Navbar />
     <transition-group
       appear
       name="itemlist"
@@ -20,8 +16,9 @@
 
 <script>
 import SingleItem from "../components/SingleItem";
+import Navbar from "../components/Navbar";
 export default {
-  components: { SingleItem },
+  components: { SingleItem, Navbar },
   data() {
     return {
       items: this.$store.state.items,

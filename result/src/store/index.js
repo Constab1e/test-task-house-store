@@ -10,19 +10,26 @@ export default createStore({
       { id: 5, title: "House 5", price: 800, img: 'https://images.adsttc.com/media/images/5e68/48ed/b357/658e/fb00/0441/newsletter/AM1506.jpg?1583892706' },
 
     ],
-    orders: [
-      
-    ]
+    checkouts: [
+      { checkoutId: '1233-1234', title: 'House 2', count: 1, name: "Armen", phone: "+79996384293", total: 400 },
+    ],
   },
   mutations: {
+    addCheckout(state, checkout) {
+      state.checkouts.push(checkout)
+    }
   },
   actions: {
+
+
   },
   getters: {
     getItem: (state) => id =>
-      state.items.find(item => item.id === id)
-
+      state.items.find(item => item.id === id),
+    getCheckout: (state) => id =>
+      state.checkouts.find(checkout => checkout.checkoutId === id)
   },
+
   modules: {
   },
 })

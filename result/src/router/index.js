@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Catalog from '../views/Catalog'
 import Home from '../views/Home'
 import OrderConfirmation from '../views/OrderConfirmation'
+import Checkout from '../views/Checkout'
+
 const routes = [
   {
     path: '/',
@@ -20,6 +22,12 @@ const routes = [
     component: OrderConfirmation,
     props: true
 
+  },
+  {
+    path: '/checkout/:checkoutId',
+    name: 'Checkout',
+    component: Checkout,
+    props: true
   }
 
 ]

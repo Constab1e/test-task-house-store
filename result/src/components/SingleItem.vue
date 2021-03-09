@@ -17,9 +17,6 @@
 <script>
 export default {
   props: ["item"],
-  methods: {
-    handleSubmit() {},
-  },
 };
 </script>
 

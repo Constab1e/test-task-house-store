@@ -1,10 +1,6 @@
 <template>
   <div class="container">
-    <nav class="navbar navbar-light bg-transparent">
-      <span @click="back" class="material-icons navbar-brand">
-        keyboard_backspace
-      </span>
-    </nav>
+    <Navbar />
     <h1 class="text-center">Order Confirmation</h1>
     <div class="container">
       <form @submit.prevent="handleSubmit">
@@ -51,7 +47,7 @@
               <input
                 v-model="phone"
                 placeholder="Enter your phone number"
-                type="text"
+                type="tel"
                 class="form-control"
               />
             </div>
@@ -68,7 +64,9 @@
 </template>
 
 <script>
+import Navbar from "../components/Navbar";
 export default {
+  components: { Navbar },
   props: ["id"],
   data() {
     return {
@@ -83,13 +81,12 @@ export default {
       discountedTotal: 0,
       promocode: 1010,
       buttonEnabled: false,
+      checkout: {},
+      checkoutId: "",
     };
   },
   methods: {
-    back() {
-      this.$router.go(-1);
-    },
-    // checks if the fields are filled up
+    // checks if the fields are filled in
     checkButton() {
       if (this.name !== "" && this.phone !== "") {
         this.buttonEnabled = false;
@@ -97,33 +94,65 @@ export default {
         this.buttonEnabled = true;
       }
     },
+    // logic for promocode discount
+    checkDiscount() {
+      if (parseInt(this.currentPromocode) === this.promocode) {
+        this.discount = true;
+        this.discountedTotal = this.total * 0.9;
+      } else {
+        this.discount = false;
+      }
+    },
+    addCheckout() {
+      this.$store.commit("addCheckout", this.checkout);
+    },
+    // handles the Buy button
+    handleSubmit() {
+      this.checkout = {
+        title: this.item.title,
+        count: this.count,
+        checkoutId: this.checkoutId,
+        name: this.name,
+        phone: this.phone,
+        total: this.total,
+      };
+      console.log(this.checkout);
+      this.addCheckout();
+      this.$router.push({
+        name: "Checkout",
+        params: { checkoutId: this.checkoutId },
+      });
+      console.log(this.$store.state.checkouts);
+    },
   },
   computed: {
     getId() {
       return parseInt(this.$route.params.id);
+    },
+    getCheckoutId() {
+      return (
+        Math.floor(Math.random() * (9999 - 1000 + 1) + 1000) +
+        "-" +
+        Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)
+      );
     },
   },
   mounted() {
     this.item = this.$store.getters.getItem(this.getId);
     this.price = this.item.price;
     this.checkButton();
+    this.checkoutId = this.getCheckoutId;
   },
   updated() {
     // logic for price
     this.total = this.price * this.count;
-    // logic for promocode discount
-    if (parseInt(this.currentPromocode) === this.promocode) {
-      this.discount = true;
-      this.discountedTotal = this.total * 0.9;
-    } else {
-      this.discount = false;
-    }
+    this.checkDiscount();
     this.checkButton();
   },
 };
 </script>
 
-<style scoped>
+<style>
 .material-icons {
   cursor: pointer;
 }
