@@ -30,8 +30,7 @@
               />
             </div>
             <div class="col-md-4">
-              <p v-if="discount" class="h1">Total: {{ discountedTotal }}$</p>
-              <p v-else class="h1" style="">Total: {{ total }}$</p>
+              <p class="h1">Total: {{ total }}$</p>
             </div>
           </div>
           <div class="row">
@@ -78,7 +77,6 @@ export default {
       total: 0,
       price: 1,
       discount: false,
-      discountedTotal: 0,
       promocode: 1010,
       buttonEnabled: false,
       checkout: {},
@@ -98,7 +96,6 @@ export default {
     checkDiscount() {
       if (parseInt(this.currentPromocode) === this.promocode) {
         this.discount = true;
-        this.discountedTotal = this.total * 0.9;
       } else {
         this.discount = false;
       }
@@ -124,6 +121,14 @@ export default {
       });
       console.log(this.$store.state.checkouts);
     },
+    applyDiscount() {
+      if (this.discount === true) {
+        this.total = this.total * 0.9;
+      }
+    },
+    calculateTotal() {
+      this.total = this.price * this.count;
+    },
   },
   computed: {
     getId() {
@@ -144,9 +149,9 @@ export default {
     this.checkoutId = this.getCheckoutId;
   },
   updated() {
-    // logic for price
-    this.total = this.price * this.count;
+    this.calculateTotal();
     this.checkDiscount();
+    this.applyDiscount();
     this.checkButton();
   },
 };

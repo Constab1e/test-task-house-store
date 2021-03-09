@@ -34,7 +34,6 @@ export default {
   },
   created() {
     this.checkout = this.getCheckout;
-    console.log(this.checkout);
   },
 };
 </script>
