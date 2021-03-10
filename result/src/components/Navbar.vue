@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-light bg-transparent">
-    <div class="container-fluid">
+    <div class="container">
       <span @click="back" class="material-icons navbar-brand">
         keyboard_backspace
       </span>

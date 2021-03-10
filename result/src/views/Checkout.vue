@@ -6,7 +6,13 @@
       <p class="h2 text-center">
         You have ordered {{ this.checkout.count }} of {{ this.checkout.title }}
       </p>
-      <p class="h2 text-center">Total amount: {{ this.checkout.total }}$</p>
+      <p class="h2 text-center" v-if="this.checkout.discount">
+        Total amount: {{ this.checkout.discountedTotal }}$
+      </p>
+      <p class="h2 text-center" v-else>
+        Total amount: {{ this.checkout.total }}$
+      </p>
+
       <p class="h2 text-center">Your order ID:{{ this.checkout.checkoutId }}</p>
       <div class="d-flex justify-content-center">
         <router-link to="/catalog" class="btn btn-primary"

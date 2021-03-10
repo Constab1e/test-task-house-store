@@ -30,7 +30,15 @@
               />
             </div>
             <div class="col-md-4">
-              <p class="h1">Total: {{ total }}$</p>
+              <div v-if="discount">
+                <p class="h1 text-decoration-line-through">
+                  Total: {{ total }}$
+                </p>
+                <p class="h1">{{ discountedTotal }}$</p>
+              </div>
+              <div v-else>
+                <p class="h1">Total: {{ total }}$</p>
+              </div>
             </div>
           </div>
           <div class="row">
@@ -77,6 +85,7 @@ export default {
       total: 0,
       price: 1,
       discount: false,
+      discountedTotal: 0,
       promocode: 1010,
       buttonEnabled: false,
       checkout: {},
@@ -96,6 +105,7 @@ export default {
     checkDiscount() {
       if (parseInt(this.currentPromocode) === this.promocode) {
         this.discount = true;
+        this.applyDiscount();
       } else {
         this.discount = false;
       }
@@ -106,6 +116,8 @@ export default {
     // handles the Buy button
     handleSubmit() {
       this.checkout = {
+        discountedTotal: this.discountedTotal,
+        discount: this.discount,
         title: this.item.title,
         count: this.count,
         checkoutId: this.checkoutId,
@@ -122,9 +134,7 @@ export default {
       console.log(this.$store.state.checkouts);
     },
     applyDiscount() {
-      if (this.discount === true) {
-        this.total = this.total * 0.9;
-      }
+      this.discountedTotal = this.total * 0.9;
     },
     calculateTotal() {
       this.total = this.price * this.count;
@@ -145,13 +155,11 @@ export default {
   mounted() {
     this.item = this.$store.getters.getItem(this.getId);
     this.price = this.item.price;
-    this.checkButton();
     this.checkoutId = this.getCheckoutId;
   },
   updated() {
     this.calculateTotal();
     this.checkDiscount();
-    this.applyDiscount();
     this.checkButton();
   },
 };
